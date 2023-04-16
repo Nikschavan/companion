@@ -173,8 +173,6 @@ function companion_wp_login() {
 
 	$auto_login = get_option( 'auto_login' );
 
-	update_option( 'auto_login', 0 );
-
 	if ( empty( $auto_login ) ) {
 		$urlparts = wp_parse_url( network_site_url() );
 		$domain = $urlparts['host'];
@@ -215,6 +213,7 @@ function companion_after_setup_theme() {
 		$creds['user_password'] = $password;
 		$creds['remember'] = true;
 		$user = wp_signon( $creds, companion_site_uses_https() );
+		update_option( 'auto_login', 0 );
 	}
 }
 
